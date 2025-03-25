@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - AssistAIve</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <style>
+        body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #f4f6fc, #e8ecf9);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .chat-container {
+    background: linear-gradient(135deg, #3f51b5, #5e60ce);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 400px;
+}
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #ffffff;
+        }
+
+        .chat-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .user-message, .bot-message {
+            margin: 10px 0;
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #4a7aff;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #9c5eff;
+            color: white;
+            align-self: flex-start;
+        }
+
+        #user-input {
+            width: 68%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-right: 8px;
+        }
+
+        #user-input:focus {
+            outline: none;
+            border: 2px solid #ffffffaa;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            background-color: #ffffff;
+            color: #5e60ce;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e0e0ff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #ffffff66;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="chat-container">
+            <h2>assistAIve</h2>
+            <div class="chat-box" id="chat-box"></div>
+            
+            <div class="input-column">
+                <input type="text" id="user-input" placeholder="Type your query, we will give you a Fairy!">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById("user-input").value;
+            var chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += "<div class='user-message'>" + userInput + "</div>";
+            chatBox.scrollTop = chatBox.scrollHeight; // 👈 auto scroll
+
+    document.getElementById("user-input").value = "";
+
+            fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.message) {
+                    document.getElementById("chat-box").innerHTML += "<div class='bot-message'>" + data.message + "</div>";
+                } else {
+                    var botResponse = `<strong>Name:</strong><br>${data.name}<br><br>
+                    <strong>Description:</strong><br>${data.description}<br><br>
+                    <strong>URL:</strong> <a href="${data.url}" target="_blank">${data.url}</a>`;
+
+
+                    chatBox.innerHTML += "<div class='bot-message'>" + botResponse + "</div>";
+                    chatBox.scrollTop = chatBox.scrollHeight;                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.getElementById("user-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
