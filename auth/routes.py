@@ -1,14 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, session
-import mysql.connector
+import pymysql
 
 auth_bp = Blueprint('auth', __name__)
 
 def connect_to_database():
-    return mysql.connector.connect(
+    return pymysql.connector.connect(
         host="localhost",
         user="root",
         password="admin",
-        database="botdata"
+        database="botdata",
+        cursorclass=pymysql.cursors.Cursor
     )
 
 @auth_bp.route("/register", methods=["GET", "POST"])
