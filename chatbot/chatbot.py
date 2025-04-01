@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, session
-import mysql.connector
+import pymysql
 import spacy
 import nltk
 from nltk.corpus import wordnet as wn
@@ -11,11 +11,12 @@ nlp = spacy.load("en_core_web_sm")
 english_dict = enchant.Dict("en_US")
 
 def connect_to_database():
-    return mysql.connector.connect(
+    return pymysql.connect(
         host="localhost",
         user="root",
         password="admin",
-        database="botdata"
+        database="botdata",
+        cursorclass=pymysql.cursors.Cursor
     )
 
 def get_synonyms(word):
