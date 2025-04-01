@@ -4,7 +4,7 @@ import pymysql
 auth_bp = Blueprint('auth', __name__)
 
 def connect_to_database():
-    return pymysql.connector.connect(
+    return pymysql.connect(
         host="localhost",
         user="root",
         password="admin",
