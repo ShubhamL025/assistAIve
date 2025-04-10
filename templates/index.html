@@ -1,171 +1,398 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot - AssistAIve</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
-    <style>
-        body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #f4f6fc, #e8ecf9);
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
+  <title>assistAIve</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3b2c97, #7554d9);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    .main-container {
+      display: flex;
+      height: 90vh;
+      width: 90vw;
+      max-width: 1200px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #f3e8ff;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
+    }
 
-        .chat-container {
-    background: linear-gradient(135deg, #3f51b5, #5e60ce);
-    color: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    width: 400px;
-}
+    .sidebar {
+      width: 250px;
+      background: #e7d6ff;
+      padding: 20px 10px;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #ffffff;
-        }
+    .sidebar-toggle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      background: #7c4dff;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
 
-        .chat-box {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 15px;
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+    .sidebar h2 {
+      margin-top: 50px;
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #5e35b1;
+      text-align: center;
+    }
 
-        .user-message, .bot-message {
-            margin: 10px 0;
-            padding: 10px 14px;
-            border-radius: 12px;
-            max-width: 75%;
-            word-wrap: break-word;
-        }
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+      min-height: 0;
+      max-height: 100%;
+    }
 
-        .user-message {
-            background-color: #4a7aff;
-            color: white;
-            align-self: flex-end;
-        }
+    .history-list::-webkit-scrollbar {
+      width: 6px;
+    }
 
-        .bot-message {
-            background-color: #9c5eff;
-            color: white;
-            align-self: flex-start;
-        }
+    .history-list::-webkit-scrollbar-thumb {
+      background-color: #7c4dff;
+      border-radius: 10px;
+    }
 
-        #user-input {
-            width: 68%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-right: 8px;
-        }
+    .history-item {
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      color: #5e35b1;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        #user-input:focus {
-            outline: none;
-            border: 2px solid #ffffffaa;
-        }
+    .chat-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 25px;
+      background: #fff;
+      border-radius: 0 20px 20px 0;
+      position: relative;
+    }
 
-        button {
-            padding: 12px 20px;
-            font-size: 1rem;
-            background-color: #ffffff;
-            color: #5e60ce;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .header {
+      font-size: 26px;
+      font-weight: bold;
+      text-align: center;
+      color: #5e35b1;
+      margin-bottom: 15px;
+      position: relative;
+    }
 
-        button:hover {
-            background-color: #e0e0ff;
-        }
+    .user-profile {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 6px 12px;
+      background: #ded1ff;
+      color: #333;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+    }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+    .chat-box {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+      background: #f3e8ff;
+      display: flex;
+      flex-direction: column;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background-color: #ffffff66;
-            border-radius: 4px;
-        }
+    .message-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 6px 0;
+    }
 
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-    </style>
+    .message-row.user {
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      font-size: 22px;
+      margin-top: 4px;
+    }
+
+    .chat-bubble {
+      padding: 12px;
+      border-radius: 16px;
+      max-width: 75%;
+      word-wrap: break-word;
+      animation: slideIn 0.3s ease-in-out;
+    }
+
+    .message-row.bot .chat-bubble {
+      background: #7c4dff;
+      color: white;
+    }
+
+    .message-row.user .chat-bubble {
+      background: #ded1ff;
+      color: #333;
+    }
+
+    .input-area {
+      display: flex;
+    }
+
+    .input-area input {
+      flex-grow: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 12px 0 0 12px;
+      outline: none;
+      font-size: 15px;
+      background: #f3e8ff;
+    }
+
+    .input-area button {
+      background: #7c4dff;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="chat-container">
-            <h2>assistAIve</h2>
-            <div class="chat-box" id="chat-box"></div>
-            
-            <div class="input-column">
-                <input type="text" id="user-input" placeholder="Type your query, we will give you a Fairy!">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-            
-        </div>
+  <div class="main-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        <h2>History</h2>
+      </div>
+  
+      <button id="clearBtn" onclick="clearHistory()" style="margin: 0 auto 10px; padding: 6px 12px; background:#7c4dff; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; hover {
+        background: #5e35b1;
+      }">🗑️ Clear</button>
+      <ul class="history-list" id="historyList"></ul>
     </div>
 
-    <script>
-        function sendMessage() {
-            var userInput = document.getElementById("user-input").value;
-            var chatBox = document.getElementById("chat-box");
-            chatBox.innerHTML += "<div class='user-message'>" + userInput + "</div>";
-            chatBox.scrollTop = chatBox.scrollHeight; // 👈 auto scroll
+    <div class="chat-container">
+      <div class="header">
+        assistAIve 
+        <div class="user-profile" onclick="toggleProfileMenu()">
+          👤 {{ username }} <span class="arrow">▾</span>
+          <div class="profile-dropdown" id="profileMenu">
+            <a href="/logout">🚪 Logout</a>
+          </div>
+        </div>
+      </div>
 
-    document.getElementById("user-input").value = "";
+      <div class="chat-box" id="chatBox">
+        <div class="message-row bot">
+          <div class="avatar">🤖</div>
+          <div class="chat-bubble">
+            👋 Hello! I'm assistAIve, your personal AI navigator.<br>
+            Ask me about any AI tools or tasks!
+          </div>
+        </div>
+      </div>
 
-            fetch("/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ message: userInput })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.message) {
-                    document.getElementById("chat-box").innerHTML += "<div class='bot-message'>" + data.message + "</div>";
-                } else {
-                    var botResponse = `<strong>Name:</strong><br>${data.name}<br><br>
-                    <strong>Description:</strong><br>${data.description}<br><br>
-                    <strong>URL:</strong> <a href="${data.url}" target="_blank">${data.url}</a>`;
+      <div class="input-area">
+        <input type="text" id="promptInput" placeholder="Describe what you want to do with AI..." onkeypress="handleKey(event)">
+        <button onclick="askBot()">Ask</button>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const clearBtn = document.getElementById('clearBtn');
+      const h2 = sidebar.querySelector('h2');
+      const historyItems = sidebar.querySelectorAll('.history-item');
 
-                    chatBox.innerHTML += "<div class='bot-message'>" + botResponse + "</div>";
-                    chatBox.scrollTop = chatBox.scrollHeight;                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+      sidebar.classList.toggle('collapsed');
 
-        document.getElementById("user-input").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
+      const collapsed = sidebar.classList.contains('collapsed');
+      sidebar.style.width = collapsed ? '60px' : '250px';
+      h2.style.display = collapsed ? 'none' : 'block';
+      clearBtn.style.display = collapsed ? 'none' : 'block';
+      historyItems.forEach(item => item.style.display = collapsed ? 'none' : 'block');
+    }
+
+    function toggleProfileMenu() {
+      const menu = document.getElementById("profileMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener("click", function (event) {
+      const profile = document.querySelector(".user-profile");
+      const dropdown = document.getElementById("profileMenu");
+      if (!profile.contains(event.target)) dropdown.style.display = "none";
+    });
+
+    function loadSidebarHistory() {
+      fetch('/get_history')
+        .then(res => res.json())
+        .then(data => {
+          const historyList = document.getElementById('historyList');
+          historyList.innerHTML = '';
+          const seen = new Set();
+          data.forEach(chat => {
+            const msg = chat.user_message.trim();
+            if (msg && !seen.has(msg)) {
+              seen.add(msg);
+              const li = document.createElement('li');
+              li.className = 'history-item';
+              li.textContent = msg.length > 30 ? msg.slice(0, 30) + '...' : msg;
+              li.title = msg;
+              li.onclick = () => {
+                const bubbles = document.querySelectorAll('.chat-bubble');
+                for (let bubble of bubbles) {
+                  if (bubble.textContent.trim().startsWith(msg)) {
+                    bubble.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    bubble.style.boxShadow = '0 0 12px #7c4dff';
+                    setTimeout(() => bubble.style.boxShadow = 'none', 1500);
+                    break;
+                  }
+                }
+              };
+              historyList.appendChild(li);
             }
+          });
         });
-    </script>
+    }
+
+    function clearHistory() {
+      fetch('/clear_history', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'success') {
+            document.getElementById('historyList').innerHTML = '';
+            showToast("Chat history cleared!");
+          }
+        });
+    }
+
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.textContent = message;
+      toast.style.position = 'fixed';
+      toast.style.bottom = '20px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.background = '#7c4dff';
+      toast.style.color = 'white';
+      toast.style.padding = '10px 20px';
+      toast.style.borderRadius = '12px';
+      toast.style.fontWeight = 'bold';
+      toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+      toast.style.zIndex = '9999';
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease-in-out';
+
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => toast.style.opacity = '1');
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
+    function askBot() {
+      const input = document.getElementById('promptInput');
+      const prompt = input.value.trim();
+      if (!prompt) return;
+
+      const chatBox = document.getElementById('chatBox');
+      const userMsgWrap = document.createElement('div');
+      userMsgWrap.className = 'message-row user';
+      userMsgWrap.innerHTML = `<div class="avatar">👤</div><div class="chat-bubble">${prompt}</div>`;
+      chatBox.appendChild(userMsgWrap);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      input.value = '';
+
+      const typingRow = document.createElement('div');
+      typingRow.className = 'message-row bot';
+      typingRow.id = 'typingRow';
+      typingRow.innerHTML = `<div class="avatar">🤖</div><div class="chat-bubble">assistAIve is typing<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>`;
+      chatBox.appendChild(typingRow);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('typingRow')?.remove();
+          data.forEach(tool => {
+            const botMsgWrap = document.createElement('div');
+            botMsgWrap.className = 'message-row bot';
+            botMsgWrap.innerHTML = `
+              <div class="avatar">🤖</div>
+              <div class="chat-bubble">
+                <strong>assistAIve:</strong><br><br>
+                <strong>Name:</strong> ${tool.name}<br><br>
+                <strong>Description:</strong> ${tool.description}<br><br>
+                <strong>URL:</strong> <a href="${tool.url}" target="_blank">🔗 Visit</a>
+              </div>`;
+            chatBox.appendChild(botMsgWrap);
+            chatBox.scrollTop = chatBox.scrollHeight;
+          });
+
+          loadSidebarHistory();
+        });
+    }
+
+    function handleKey(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        askBot();
+      }
+    }
+
+    window.onload = loadSidebarHistory;
+  </script>
 </body>
 </html>
