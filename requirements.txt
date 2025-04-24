@@ -1,5 +1,5 @@
-nltk
-flask
+Flask
+mysql-connector-python
 spacy
+nltk
 enchant
-mysql.connector
