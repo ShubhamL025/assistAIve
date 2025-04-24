@@ -1,171 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot - AssistAIve</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
-    <style>
-        body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #f4f6fc, #e8ecf9);
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .chat-container {
-    background: linear-gradient(135deg, #3f51b5, #5e60ce);
-    color: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    width: 400px;
-}
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #ffffff;
-        }
-
-        .chat-box {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 15px;
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .user-message, .bot-message {
-            margin: 10px 0;
-            padding: 10px 14px;
-            border-radius: 12px;
-            max-width: 75%;
-            word-wrap: break-word;
-        }
-
-        .user-message {
-            background-color: #4a7aff;
-            color: white;
-            align-self: flex-end;
-        }
-
-        .bot-message {
-            background-color: #9c5eff;
-            color: white;
-            align-self: flex-start;
-        }
-
-        #user-input {
-            width: 68%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-right: 8px;
-        }
-
-        #user-input:focus {
-            outline: none;
-            border: 2px solid #ffffffaa;
-        }
-
-        button {
-            padding: 12px 20px;
-            font-size: 1rem;
-            background-color: #ffffff;
-            color: #5e60ce;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #e0e0ff;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #ffffff66;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>assistAIve</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script defer src="static/js/script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="container">
-        <div class="chat-container">
-            <h2>assistAIve</h2>
-            <div class="chat-box" id="chat-box"></div>
-            
-            <div class="input-column">
-                <input type="text" id="user-input" placeholder="Type your query, we will give you a Fairy!">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-            
+  <div class="main-container">
+    
+    <div class="sidebar">
+      <div class="sidebar-inner">
+        <h2>History</h2>
+        <div class="history-scroll">
+          <ul class="history-list" id="historyList"></ul>
         </div>
+        <div class="clear-button-wrapper">
+          <button id="clearBtn" onclick="clearHistory()">🗑️ Clear</button>
+        </div>
+      </div>
     </div>
 
-    <script>
-        function sendMessage() {
-            var userInput = document.getElementById("user-input").value;
-            var chatBox = document.getElementById("chat-box");
-            chatBox.innerHTML += "<div class='user-message'>" + userInput + "</div>";
-            chatBox.scrollTop = chatBox.scrollHeight; // 👈 auto scroll
+    
+    <button class="sidebar-navigator" id="sidebarToggleBtn" onclick="toggleSidebar()">
+      <span id="arrowIcon">❮</span>
+    </button>
 
-    document.getElementById("user-input").value = "";
+    
+    <div class="chat-container">
+      <div class="header">
+        <span>assistAIve </span>
+        <div class="user-profile" onclick="toggleProfileMenu()">
+          <span class="icon">👤</span> {{ session['username'] }} <span class="arrow">▾</span>
+          <div class="profile-dropdown" id="profileMenu">
+            <a href="#" onclick="showProfileModal()">👤 My Profile</a>
+            <a href="#" onclick="showSettingsModal()">⚙️ Settings</a>
+            <a href="#" onclick="sendFeedback()">✉️ Feedback</a>
+            <a href="#" onclick="surpriseMe()">🪄 Surprise Me!</a>
+            {% if session['role'] == 'admin' %}
+              <a href="#" onclick="showAdminFeedback()">📋 View Feedback</a>
+              <a href="#" onclick="showAdminActivities()">📊 View All Activities</a>
+            {% endif %}
+            <a href="/logout">⎋ Logout</a>
+          </div>
+        </div>
+      </div>
 
-            fetch("/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ message: userInput })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.message) {
-                    document.getElementById("chat-box").innerHTML += "<div class='bot-message'>" + data.message + "</div>";
-                } else {
-                    var botResponse = `<strong>Name:</strong><br>${data.name}<br><br>
-                    <strong>Description:</strong><br>${data.description}<br><br>
-                    <strong>URL:</strong> <a href="${data.url}" target="_blank">${data.url}</a>`;
+      
+      <div class="chat-box" id="chatBox">
+        <div class="message-row bot">
+          <div class="avatar">🤖</div>
+          <div class="chat-bubble">
+            Hello! I'm assistAIve, your personal AI navigator.<br>
+            Ask me about any AI tools or tasks!
+          </div>
+        </div>
+      </div>
 
+      
+      <div class="input-area">
+        <input type="text" id="promptInput" placeholder="Describe what you want to do with AI..." onkeypress="handleKey(event)">
+        <button onclick="askBot()">Ask</button>
+      </div>
 
-                    chatBox.innerHTML += "<div class='bot-message'>" + botResponse + "</div>";
-                    chatBox.scrollTop = chatBox.scrollHeight;                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+      
+      <div id="adminActivitiesSection" class="admin-section" style="display: none;">
+        <button onclick="returnToChat()" class="themeBtn back-btn">❮ Back to Chat</button>
+        <h3>📝 All User Chats</h3>
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>User Message</th>
+                <th>Bot Response</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody id="chatActivityBody"></tbody>
+          </table>
+        </div>
+      </div>
 
-        document.getElementById("user-input").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
-    </script>
+      
+      <div id="adminFeedbackSection" class="admin-section" style="display: none;">
+        <button onclick="returnToChat()" class="themeBtn back-btn">❮ Back to Chat</button>
+        <h3>📋 All Feedback</h3>
+        <div class="table-wrapper"> 
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Submitted At</th>
+              </tr>
+            </thead>
+            <tbody id="adminFeedbackBody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+      
+      <div id="profileModal" class="modal-box profile-modal-anchored" style="display:none;">
+        <button id="profileBackBtn" onclick="backToDropdown(event)">❮</button>
+        <div class="profile-details">
+          <h3 class="profile-title"><span class="profile-icon">👤</span><strong>My Profile</strong></h3>
+          <p><strong>Name:</strong> {{ session['username'] }}</p>
+          <p><strong>Email:</strong> {{ session['user_email'] }}</p>
+          <p><strong>Role:</strong> {{ session['role'] }}</p>
+          <p><strong>Account Type:</strong>
+            {% if session['role'] == 'admin' %} Admin {% else %} Free {% endif %}
+          </p>
+          <p><strong>Total Chats:</strong> <span id="chatCount">{{ chat_count }}</span></p>
+        </div>
+      </div>
+
+      
+      <div id="settingsModal" class="modal-box profile-modal-anchored" style="display:none;">
+        <button id="settingsBackBtn" onclick="backToDropdown(event)">❮</button>
+        <div class="settings-content">
+          <h3 class="settings-title"><span class="profile-icon">⚙️</span><strong>Settings</strong></h3>
+          <p><strong>Theme:</strong></p>
+          <div style="display:flex; gap:8px; margin-bottom:14px;">
+            <button onclick="setTheme('pastel')" class="themeBtn" style="background:#7c4dff;">Pastel</button>
+            <button onclick="setTheme('chatgpt')" class="themeBtn classic">Classic</button>
+            <button onclick="setTheme('dark')" class="themeBtn" style="background:#111;">Dark</button>
+          </div>
+          <hr>
+          <p><strong>Chats:</strong></p>
+          <button onclick="clearHistory()" class="themeBtn" style="background:#ff5252;">Clear All</button>
+          <hr>
+          <p><strong>Account:</strong></p>
+          <p style="margin: 0;">You're on <strong>Free</strong> plan</p>
+        </div>
+      </div>
+
+      
+      <div id="feedbackModal">
+        <h3 style="margin-top:0;">✉️ Feedback</h3>
+        <textarea id="feedbackInput" rows="4" style="width:100%; border-radius:8px; padding:8px;"></textarea>
+        <button id="feedbackSendBtn" onclick="submitFeedback(event)">Send</button>
+        <button onclick="closeFeedback(event)">Cancel</button>
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>
