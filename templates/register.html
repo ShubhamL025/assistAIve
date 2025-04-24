@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,7 +156,7 @@
         <input type="email" name="email" placeholder="Email" required />
         <div class="password-wrapper">
           <input type="password" name="password" placeholder="Password" required />
-          <span class="toggle-password">⌀</span>
+          <span class="toggle-password">🔒</span>
         </div>
         <button type="submit">Sign Up</button>
       </form>
@@ -174,7 +175,7 @@
         const input = toggle.previousElementSibling;
         const isHidden = input.type === 'password';
         input.type = isHidden ? 'text' : 'password';
-        toggle.textContent = isHidden ? '👁️' : '⌀';
+        toggle.textContent = isHidden ? '👁️' : '🔒';
       });
     });
   </script>

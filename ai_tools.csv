@@ -1,29 +1,102 @@
-id,name,url,description,category,keywords
-1,Gamma,https://gamma.app,"Create beautiful presentations using AI",Presentations,"ppt slide deck presentation"
-5,Tome,https://tome.app,"Tome uses AI to build storytelling and pitch decks quickly.",Presentations,"tome slides pitch storytelling presentation deck"
-6,Midjourney,https://www.midjourney.com,"AI that generates high-quality artistic images from prompts.","Image Generation","image generate art midjourney visuals design"
-7,DALL·E,https://openai.com/dall-e,"Generate realistic images and art from a text description.","Image Generation","image ai draw art painting visual prompt create"
-8,"Leonardo AI",https://leonardo.ai,"Create production-quality images and game assets using AI.","Image Generation","image game asset creation art design"
-9,Jasper,https://www.jasper.ai,"Powerful AI writing assistant for blogs, ads, and social media.","Writing Assistant","jasper writing ai content blog social media ads"
-10,Writesonic,https://writesonic.com,"Create SEO content, ads, and product descriptions in seconds.","Writing Assistant","seo writing copy content generator product"
-11,ChatGPT,https://chat.openai.com,"Advanced AI chatbot for understanding and generating natural language.","Chat / Prompt Helper","prompt chatbot gpt openai assistant conversation"
-12,Claude,https://claude.ai,"AI assistant by Anthropic focused on safe, thoughtful conversation.","Chat / Prompt Helper","claude chatbot ai helper assistant conversation"
-13,"ClickUp AI",https://clickup.com/ai,"AI-enhanced productivity platform to manage tasks, docs, goals, and timelines.","Project Management","task manager project productivity ai docs timeline goals"
-14,Uizard,https://uizard.io,"AI-powered design tool to create UI/UX mockups and wireframes in minutes.","UI/UX Design","ui ux design wireframe prototype uizard figma interface"
-15,Durable,https://durable.co,"Build a complete website for your business using AI in under 30 seconds.","Website Builder","ai website durable create builder business design"
-16,Builder.ai,https://www.builder.ai,"Create mobile and web apps without coding using Builder.ai's smart automation.","App Development","app development builder no-code mobile web"
-17,AstraFit,https://astrafit.com,"Virtual fitting room using AI to help users try clothes based on body measurements.","Virtual Try-On (Clothing)","virtual fitting clothes try-on sizing fashion"
-18,"Hairstyle AI",https://www.hairstyleai.com,"Upload a photo and preview how you look with different hairstyles instantly.","Virtual Try-On (Hair)","hairstyle ai try hair look preview virtual makeover"
-19,"Interior AI",https://interiorai.com,"Redesign your room with different styles using AI-based interior transformations.","Interior Design","room design decor interior transformation ai furniture"
-20,"Leena AI",https://www.leena.ai,"Automate HR helpdesk, employee onboarding, and document management using AI.","Employee Management","employee management hr onboarding helpdesk leena"
-21,"Runway ML",https://runwayml.com,"AI video editing suite with features like background removal and motion tracking.","Video Editing","video editing ai runway ml remove background effects"
-22,Rezi,https://www.rezi.ai,"AI-powered resume builder that tailors your CV to job descriptions for maximum impact.","Resume Builder","resume cv builder job ai ats optimized writing"
-23,"Ada Health",https://ada.com,"A medical symptom checker that uses AI to recommend possible conditions and next steps.","Medical Diagnosis","health symptoms checker diagnosis recommendation ada ai"
-24,"K Health",https://www.khealth.com,"Consult with licensed doctors and get medical advice using K Health's AI-powered system.","Doctor Consultation","doctor online consultation ai health treatment medicine khealth"
-25,"Woebot Health",https://woebothealth.com,"A mental health chatbot that offers conversational CBT and emotional support using AI.","Mental Health AI","mental health chatbot woebot depression anxiety therapy support"
-26,"Khan Academy",https://www.khanacademy.org,"A free learning platform offering practice and instructional videos for students of all levels.","Learning Platform","free learning platform math science videos students courses"
-27,Coursary,https://www.coursary.com,"Discover and compare online courses across platforms like Coursera, edX, and Udemy.","Course Finder AI","course search comparison learning helper find best online class"
-28,Scholarcy,https://www.scholarcy.com,"AI-powered tool that summarizes research papers and academic content.","Academic Summarizer","summarize research paper academic ai scholarcy notes"
-29,Cleo,https://web.meetcleo.com,"AI finance assistant that helps you budget, track spending, and save money with personality.","Personal Finance Assistant","budgeting money finance savings assistant cleo chatbot"
-30,Wally,https://wally.me,"Smart personal finance app for expense tracking, budget planning, and wealth insights.","Asset Management AI","track expenses budget assets money wally finance wealth"
-31,Zeni,https://www.zeni.ai,"AI-powered financial operations platform for startups and businesses.","Financial Operations","zeni accounting ai operations finance bookkeeping startup"
+id,name,category,description,keywords,url
+1,Futurepedia,Aggregators,"Business AI Models","directory, search, AI tools",https://www.futurepedia.io
+2,Insidr.ai,Aggregators,"Curated list of AI tools with up-to-date rankings and filters.","curated, list, filters, rankings",https://www.insidr.ai
+3,"There’s An AI For That",Aggregators,"Massive searchable index of AI tools by task.","searchable, index, task-based",https://theresanaiforthat.com
+4,TopAI.tools,Aggregators,"List of trending AI tools by user voting and reviews.","trending, voting, reviews",https://topai.tools
+5,"AI Scout",Aggregators,"Community-based directory of helpful AI tools.","community, helpful, discovery",https://aiscout.ai
+6,Descript,"Audio & Voice","Audio & video editor with text-based control and transcription.","audio editing, video editing, transcription",https://www.descript.com
+7,"Murf AI","Audio & Voice","Lifelike voice generator for text-to-speech audio.","voice generator, text-to-speech",https://www.murf.ai
+8,Deepgram,"Audio & Voice","Real-time speech recognition platform with high accuracy.","speech recognition, real-time",https://www.deepgram.com
+9,Sonix,"Audio & Voice","AI-powered transcription for audio & video.","transcription, audio, video",https://sonix.ai
+10,Otter.ai,"Audio & Voice","Automatic real-time meeting transcriber with summaries.","meeting, transcription, summaries",https://otter.ai
+11,"GitHub Copilot","Code Generation","AI coding assistant for autocompletion and suggestions.","code, autocomplete, assistant",https://github.com/features/copilot
+12,Tabnine,"Code Generation","AI code completion in multiple IDEs.","code completion, IDE",https://www.tabnine.com
+13,AskCodi,"Code Generation","Code generation, SQL builder, and comment assistant.","code, SQL, comments",https://www.askcodi.com
+14,"Cody AI","Code Generation","AI assistant for writing, editing, and refactoring code.","code, refactor, edit",https://meetcody.ai
+15,"Claude (code review)","Code Generation","Conversational model good for logic, debugging, and refactoring.","debugging, refactoring, Claude",https://claude.ai
+16,MidJourney,"Generative Art","Text-to-image AI that creates stunning digital artwork.","art, text-to-image, MidJourney",https://www.midjourney.com
+17,"DALL·E 2","Generative Art","Create images from natural language descriptions.","text-to-image, DALL-E, creative",https://openai.com/dall-e-2
+18,Leonardo.ai,"Generative Art","Generate creative visual assets and concepts via AI.","visual assets, creative, Leonardo",https://leonardo.ai
+19,Artbreeder,"Generative Art","Blend and evolve images using AI.","image blending, evolution",https://www.artbreeder.com
+39,RunwayML,"Generative Video","Generative video editor for real-time creation.",NULL,https://runwayml.com
+40,Pictory,"Generative Video","Generate videos from scripts or articles.",NULL,https://pictory.ai
+41,Synthesia,"Generative Video","Turn text into AI video with avatars.",NULL,https://www.synthesia.io
+42,"DeepBrain AI","Generative Video","Turn scripts into talking AI avatars.",NULL,https://www.deepbrain.io
+43,Rephrase.ai,"Generative Video","Personalize videos using AI avatars.",NULL,https://www.rephrase.ai
+44,Remove.bg,"Image Improvement","Remove backgrounds from images instantly.",NULL,https://www.remove.bg
+45,Cleanup.pictures,"Image Improvement","Erase objects and clean up images using AI.",NULL,https://cleanup.pictures
+46,"Let’s Enhance","Image Improvement","Upscale and fix image quality without losing detail.",NULL,https://letsenhance.io
+47,VanceAI,"Image Improvement","AI-powered background removal, enhancement, and colorization.",NULL,https://vanceai.com
+48,"Upscale Media","Image Improvement","Enhance resolution and sharpen photos with AI.",NULL,https://upscale.media
+49,"Jasper AI",Marketing,"AI content assistant for marketing, SEO, and ad copy.",NULL,https://www.jasper.ai
+50,Copy.ai,Marketing,"Write email, blog, and social media content using AI.",NULL,https://www.copy.ai
+51,Writesonic,Marketing,"AI writing platform for SEO-optimized content.",NULL,https://writesonic.com
+52,Anyword,Marketing,"AI content generator optimized for conversions.",NULL,https://anyword.com
+53,Copysmith,Marketing,"AI-powered platform for large-scale content marketing teams.",NULL,https://copysmith.ai
+54,Mem,Productivity,"AI-powered note-taking that remembers context.",NULL,https://mem.ai
+55,Supernormal,Productivity,"Automatically generates meeting notes with summaries.",NULL,https://supernormal.com
+56,"Taskade AI",Productivity,"AI assistant for task lists, planning, and notes.",NULL,https://www.taskade.com
+57,Fireflies.ai,Productivity,"AI meeting assistant to record, transcribe, and summarize.",NULL,https://fireflies.ai
+58,Elicit,Research,"AI research assistant for summarizing academic papers.",NULL,https://elicit.org
+59,Consensus,Research,"Search academic research with AI summarization.",NULL,https://consensus.app
+60,Scite,Research,"AI tool to analyze how scientific papers cite each other.",NULL,https://scite.ai
+61,ResearchRabbit,Research,"Discover papers and researchers via AI-powered graphs.",NULL,https://www.researchrabbit.ai
+62,"Semantic Scholar",Research,"AI-enhanced research database for fast exploration.",NULL,https://www.semanticscholar.org
+63,TTSMaker,Text-to-Speech,"Realistic voice synthesis using text input.",NULL,https://ttsmaker.com
+64,Play.ht,Text-to-Speech,"AI-powered TTS with hundreds of voices and styles.",NULL,https://play.ht
+65,ElevenLabs,Text-to-Speech,"Ultra-realistic voice cloning and narration.",NULL,https://www.elevenlabs.io
+66,Lovo.ai,Text-to-Speech,"Generate audio narration using AI voices.",NULL,https://lovo.ai
+67,DeepL,Translation,"One of the most accurate AI-powered translators.",NULL,https://www.deepl.com
+68,"Google Translate",Translation,"AI-backed language translation across 100+ languages.",NULL,https://translate.google.com
+69,Papago,Translation,"AI language translator by Naver for Asian languages.",NULL,https://papago.naver.com
+70,"Translate Me",Translation,"Offline and secure AI translation tool.",NULL,https://www.translate-me.ai
+71,LanguageTool,Translation,"Multilingual grammar and translation assistant.",NULL,https://www.languagetool.org
+72,Riverside.fm,Podcasting,"Record podcasts and interviews with local AI backup.",NULL,https://riverside.fm
+73,Podcastle,Podcasting,"AI podcast recording and editing suite.",NULL,https://podcastle.ai
+74,"Cleanvoice AI",Podcasting,"Remove filler words and noise from audio with AI.",NULL,https://cleanvoice.ai
+75,Alitu,Podcasting,"Podcast maker that automates editing and publishing.",NULL,https://alitu.com
+76,Veed.io,"Video Editing","Online video editing platform with AI enhancements.",NULL,https://www.veed.io
+77,Kapwing,"Video Editing","Video editing with auto subtitles, templates, and more.",NULL,https://www.kapwing.com
+89,Wix,"Website Builder","AI-powered drag-and-drop website builder for personal",NULL," and portfolio websites."
+90,"Framer AI","Website Builder","Instantly create modern",NULL,"ai website, create site, build site, responsive website, landing page, no-code, generate page, make a website, framer, website builder, design site, instant website"
+91,Durable,"Website Builder","One-click AI website builder designed for entrepreneurs",NULL," and small businesses."
+92,Beautiful.ai,"Presentation Making","Smart presentation tool that designs slides automatically.","presentation, smart slides, templates",https://www.beautiful.ai
+93,Tome,"Presentation Making","Narrative presentation builder with AI assistance.","storytelling, presentations, AI slides",https://tome.app
+94,Simplified,Marketing,"AI-powered platform for content creation, video, design, and social media marketing.","content, marketing, video, copy",https://simplified.com
+96,Rezi,"Resume Builder","AI resume builder that tailors resumes to job descriptions.","resume, job match, ATS",https://www.rezi.ai
+97,Kickresume,"Resume Builder","Resume and cover letter builder with AI assistance and templates.","resume, cover letter, templates",https://www.kickresume.com
+98,StudyMonkey,"Study Guider","AI study assistant that helps with notes, summaries, and quizzes.","study, summaries, flashcards",https://www.studymonkey.ai
+99,Socratic,"Study Guider","Google AI app that helps students learn using text and voice-based Q&A.","homework help, math, science",https://socratic.org
+100,Lalaland.ai,"Fashion Advisor","AI-generated fashion models for virtual clothing try-ons.","fashion, virtual models, ecommerce",https://www.lalaland.ai
+101,Fashable,"Fashion Advisor","AI-based clothing design and fashion trend analysis.","design, fashion trends, styling",https://fashable.com
+102,Cleo,"Financial Assistant","AI budgeting app that gives financial advice with humor.","budget, finance, chatbot",https://web.meetcleo.com
+103,Wallet.ai,"Financial Assistant","AI assistant that learns spending habits to give money advice.","finance, spending, savings",https://wallet.ai
+104,Codeium,"Code Generator","AI-powered coding assistant for autocompleting and generating code.","autocomplete, coding, devtools",https://www.codeium.com
+106,"Runway ML","Video Enhancer","AI video editing tool for background removal and scene generation.","video, editor, background",https://runwayml.com
+108,Looka,"Logo Maker","AI-powered logo and brand kit creator.","logo, branding, design",https://looka.com
+109,Brandmark,"Logo Maker","Create logos and visual assets with AI.","branding, logo, icons",https://brandmark.io
+111,Resemble.ai,"Voice Cloning","Realistic voice cloning for speech and dialogue.","clone, voiceover, TTS",https://www.resemble.ai
+112,Gamma.app,"Presentation Making","AI Presentation Maker","slides, storytelling, visuals",https://gamma.app
+113,Ocoya,Marketing,"Social media content creation with AI, scheduler included.","social, content, scheduler",https://www.ocoya.com
+114,Teal,"Resume Builder","Job tracker and AI resume enhancer with real-time job matching.","resume, job tracker, ATS",https://www.tealhq.com
+115,ScholarAI,"Study Guider","Summarizes academic papers and answers questions using GPT.","papers, research, study",https://scholarai.info
+116,Finty,"Financial Assistant","Compare credit cards and loans using AI recommendations.","finance, compare, credit",https://finty.com
+117,"Deep Dream Generator","Image Generator","AI image generator for dream-like visuals and art.","dream, art, neural",https://deepdreamgenerator.com
+118,Fliki,"Video Enhancer","Convert text into videos with voiceover using AI.","text to video, TTS, explainer",https://fliki.ai
+119,SlidesAI,"Presentation Making","Convert any text into professional slides automatically.","text to slides, decks, AI",https://www.slidesai.io
+120,Designs.ai,"Logo Maker","Full branding kit generator with logos, videos, and banners.","brand, logo, video",https://designs.ai
+121,Taplio,Marketing,"AI for building LinkedIn presence and content scheduling.","linkedin, social media, personal brand",https://taplio.com
+122,Resume.io,"Resume Builder","Simple resume builder with templates and instant download.","resume, CV, builder",https://resume.io
+123,"Notion AI","Study Guider","AI writing assistant and study planner inside Notion.","planner, notes, writing",https://www.notion.so/product/ai
+125,"Kuki AI",Chatbot,"Conversational AI chatbot for customer interaction.","chatbot, customer support",https://www.kuki.ai
+126,Quickchat,Chatbot,"Multilingual AI chatbot for businesses.","support, multilingual, chatbot",https://quickchat.ai
+127,"Magic Eraser","Image Editor","Erase unwanted parts of images using AI.","image cleanup, remove object",https://magicstudio.com
+131,Taskade,Productivity,"Collaborative task management and AI assistant for planning.","tasks, planning, collaboration",https://www.taskade.com
+132,Magical,Productivity,"AI automation tool to fill forms and send messages instantly.","autofill, macros, shortcut",https://www.getmagical.com
+133,Lovo,"Voice Cloning","AI voiceover generator for marketing and video production.","voiceover, TTS, media",https://www.lovo.ai
+134,Kaiber,"Video Enhancer","Turn music and stories into visuals with generative video.","video, music, generative",https://www.kaiber.ai
+135,PromptHero,"Prompt Tools","Search engine for best prompts for AI tools.","prompts, generative AI, search",https://prompthero.com
+136,AISEO,Marketing,"SEO and blog optimization with AI writing assistance.","SEO, writing, content",https://aiseo.ai
+137,Genmo,"Video Enhancer","Text-to-video animation creator powered by AI.","text to video, animation, story",https://www.genmo.ai
+138,"Opus Clip","Video Enhancer","AI tool that repurposes long videos into viral short clips.","video clipper, shortform, AI",https://www.opus.pro
+139,Durable,"Website Builder","Build an entire website with AI in under a minute.","website builder, fast, AI",https://durable.co

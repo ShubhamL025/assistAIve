@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,19 +149,19 @@
 </head>
 <body>
   <div class="container login-layout">
-    <div class="panel-section"> <!-- Left Panel -->
+    <div class="panel-section"> 
       <h2>Hello, Friend!</h2>
       <p>Register with your personal details to use all of site features</p>
       <a href="/register">SIGN UP</a>
     </div>
   
-    <div class="form-section"> <!-- Right Form -->
+    <div class="form-section"> 
       <h2>Sign In</h2>
       <form action="/login" method="POST">
         <input type="text" name="username" placeholder="Username" required />
         <div class="password-wrapper">
           <input type="password" name="password" placeholder="Password" required />
-          <span class="toggle-password">⌀</span>
+          <span class="toggle-password">🔒</span>
         </div>
         <button type="submit">Sign In</button>
       </form>
@@ -175,7 +176,7 @@
         const input = toggle.previousElementSibling;
         const isHidden = input.type === 'password';
         input.type = isHidden ? 'text' : 'password';
-        toggle.textContent = isHidden ? '👁️' : '⌀';
+        toggle.textContent = isHidden ? '👁️' : '🔒';
       });
     });
   </script>
